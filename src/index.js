@@ -1,6 +1,6 @@
 import 'aframe';
 //import 'aframe-particle-system-component';
-import {Entity, Scene} from 'aframe-react';
+//import {Entity, Scene} from 'aframe-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {observer} from 'mobx-react';
@@ -19,7 +19,7 @@ setInterval(()=>{
 const SceneComponent = observer(class extends React.Component {
     render() {
         return (
-            <Scene>
+            <a-scene>
 
 
                 <a-box position="-1 0.5 -3" rotation="0 45 0" color={this.props.data.color} shadow></a-box>
@@ -29,8 +29,8 @@ const SceneComponent = observer(class extends React.Component {
                 <a-sky color="#ECECEC"></a-sky>
 
 
-               {/* <a-entity hand-controls="left" aabb-collider="objects: .cube;" grab></a-entity>
-                <a-entity hand-controls="right" aabb-collider="objects: .cube;" grab></a-entity>*/}
+                <a-entity hand-controls="left" aabb-collider="objects: .cube;" grab></a-entity>
+                <a-entity hand-controls="right" aabb-collider="objects: .cube;" grab></a-entity>
 
 
 
@@ -38,7 +38,7 @@ const SceneComponent = observer(class extends React.Component {
                 <Entity light={{type: 'point'}}/>
                 <Entity gltf-model={{src: 'virtualcity.gltf'}}/>
                 <Entity text={{value: 'Hello, WebVR!'}}/>*/}
-            </Scene>
+            </a-scene>
         );
     }
 });
