@@ -33,7 +33,7 @@ const groundBody = world.add({
     belongsTo: 1, // The bits of the collision groups to which the shape belongs.
     collidesWith: 0xffffffff // The bits of the collision groups with which the shape collides.
 });
-
+groundBody;
 
 
 const data = observable({ color: "green",meshes:[] });
@@ -70,6 +70,15 @@ function addMesh(){
     console.log(mesh);
 
     data.meshes.push(mesh);
+
+
+    setTimeout(()=>{
+        const index = data.meshes.indexOf(mesh);
+        if (index > -1) {
+            data.meshes.splice(index, 1);
+        }
+
+    },5000);
 
 }
 
@@ -171,16 +180,11 @@ const SceneComponent = observer(class extends React.Component {
             <a-scene vr-mode-ui="enabled: true"  stats style={{position: 'absolute', height: '100%', width: '100%'}}>
 
 
-                <a-box position="-1 6 -3" rotation="0 45 0" color={this.props.data.color} shadow></a-box>
-                <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
-                <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>
+                {/*<a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" shadow></a-sphere>
+                <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" shadow></a-cylinder>*/}
 
 
-
-                {/*<a-entity  physics-body="boundingBox: 100 1 100; mass: 0; velocity: 0 0 0" position="0 -.5 0" width="200" height="200"></a-entity>*/}
                 <a-plane position="0 0 0" rotation="-90 0 0" width="200" height="200" color="#7BC8A4" shadow></a-plane>
-
-
 
 
 
@@ -194,7 +198,6 @@ const SceneComponent = observer(class extends React.Component {
 
 
                 {this.props.data.meshes.map((meshData,i)=>(
-
                     <a-box position={meshData.position.join(' ')} rotation={meshData.rotation.join(' ')} color={meshData.color} shadow key={i}></a-box>
 
                 ))}
@@ -202,10 +205,7 @@ const SceneComponent = observer(class extends React.Component {
 
 
 
-                {/*<Entity particle-system={{preset: 'snow'}}/>
-                <Entity light={{type: 'point'}}/>
-                <Entity gltf-model={{src: 'virtualcity.gltf'}}/>
-                <Entity text={{value: 'Hello, WebVR!'}}/>*/}
+
             </a-scene>
         );
     }
